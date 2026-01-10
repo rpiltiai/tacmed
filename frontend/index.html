@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TCCC Tutor | Tactical Combat Casualty Care</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- AWS SDK and Cognito SDK -->
+    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.1001.0.min.js"></script>
+    <script src="https://unpkg.com/amazon-cognito-identity-js@6.3.7/dist/amazon-cognito-identity.min.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <!-- Auth Screen -->
+        <div id="auth-screen" class="screen active">
+            <div class="glass-panel slide-up">
+                <div class="brand">
+                    <div class="logo-icon">⚕️</div>
+                    <h1>TCCC Tutor</h1>
+                    <p>AI-Powered Medic Assistant</p>
+                </div>
+
+                <form id="login-form">
+                    <div class="input-group">
+                        <input type="email" id="email" placeholder="Email" required autocomplete="email">
+                    </div>
+                    <div class="input-group">
+                        <input type="password" id="password" placeholder="Password" required
+                            autocomplete="current-password">
+                    </div>
+                    <button type="submit" class="btn-primary glow-effect">Login</button>
+                    <p class="toggle-auth">Need access? <span id="show-register">Register</span></p>
+                </form>
+
+                <form id="register-form" class="hidden">
+                    <div class="input-group">
+                        <input type="email" id="reg-email" placeholder="Email" required autocomplete="email">
+                    </div>
+                    <div class="input-group">
+                        <input type="password" id="reg-password" placeholder="Password" required
+                            autocomplete="new-password">
+                    </div>
+                    <div class="input-group">
+                        <input type="password" id="reg-confirm" placeholder="Confirm Password" required
+                            autocomplete="new-password">
+                    </div>
+                    <button type="submit" class="btn-primary glow-effect">Register</button>
+                    <p class="toggle-auth">Have an account? <span id="show-login">Login</span></p>
+                </form>
+                <div id="auth-message"></div>
+            </div>
+        </div>
+
+        <!-- Dashboard Screen -->
+        <div id="dashboard-screen" class="screen hidden">
+            <nav class="glass-nav">
+                <div class="nav-logo">⚕️ TCCC Tutor</div>
+                <div class="nav-status">Online</div>
+                <button id="logout-btn" class="btn-text">Logout</button>
+            </nav>
+
+            <main class="dashboard-grid">
+                <!-- Voice Assistant -->
+                <section class="card glass-panel" id="assistant-card">
+                    <div class="card-header">
+                        <h2>Tactical Voice Assistant</h2>
+                        <span class="badge">AI Ready</span>
+                    </div>
+                    <div class="assistant-interface">
+                        <div id="chat-history" class="chat-area">
+                            <div class="message system">Listening for protocol queries or casualty reports...</div>
+                        </div>
+                        <div class="controls">
+                            <div class="input-area" style="display: flex; gap: 0.5rem; margin-bottom: 0.5rem;">
+                                <input type="text" id="chat-input" placeholder="Type protocol query..." style="flex:1;">
+                                <button id="send-btn" class="btn-primary"
+                                    style="width: auto; padding: 0.8rem 1.2rem;">➤</button>
+                            </div>
+                            <button id="record-btn" class="mic-btn pulse-animation">
+                                <span class="icon">🎙️</span>
+                            </button>
+                            <span id="recording-status">Hold to Speak or Type</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Sidebar -->
+                <aside class="sidebar-grid">
+                    <div class="card glass-panel" id="quiz-card">
+                        <h3>Scenario Quiz</h3>
+                        <p>Test your knowledge on TCCC protocols.</p>
+                        <button id="start-quiz" class="btn-secondary">Start Scenario</button>
+                        <div id="quiz-area" class="hidden"></div>
+                    </div>
+
+                    <div class="card glass-panel" id="leaderboard-card">
+                        <h3>Top Medics</h3>
+                        <ul id="leaderboard-list">
+                            <li>Loading...</li>
+                        </ul>
+                    </div>
+                </aside>
+            </main>
+        </div>
+    </div>
+
+    <!-- Config Injection -->
+    <script>
+        // Placeholder for config, will be populated by deployment or app.js
+        window.APP_CONFIG = {
+            UserPoolId: 'eu-central-1_J3jhLeL49', // Updated dynamically
+            ClientId: '1av0famvuo8phcsfovn1lkj49p',
+            ApiEndpoint: 'https://twtb8kdn28.execute-api.eu-central-1.amazonaws.com'
+        };
+    </script>
+    <script src="app.js"></script>
+</body>
+
+</html>

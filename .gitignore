@@ -1,0 +1,25 @@
+# AWS Infrastructure Outputs (Sensitive)
+infrastructure_outputs.json
+setup_config.txt
+*.zip
+kb-trust-policy.json
+kb-policy.json
+policy_update.json
+bucket_policy.json
+models.json
+trust-policy.json
+policy.json
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Temporary audio/media
+audio-temp/
+tccc_guidelines.pdf
+clinical-guidelines-2024-ua.pdf
