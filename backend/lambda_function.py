@@ -55,6 +55,8 @@ def lambda_handler(event, context):
             return handle_quiz(event, headers)
         elif path == '/leaderboard' and http_method == 'GET':
             return handle_leaderboard(headers)
+        elif path == '/score' and http_method == 'POST':
+            return handle_score_update(event, headers)
         else:
             return {'statusCode': 404, 'headers': headers, 'body': json.dumps({'error': 'Not Found'})}
     except Exception as e:
@@ -132,12 +134,36 @@ def handle_ask(event, headers):
         if not question:
             return {'statusCode': 400, 'headers': headers, 'body': json.dumps({'error': 'Question required'})}
             
-        # RAG Logic: Use Bedrock's retrieve_and_generate with the TCCC Guidelines PDF in S3
+        # RAG Logic: Use Bedrock's retrieve_and_generate with multiple TCCC documents from S3
         bucket_name = get_kb_bucket()
         if not bucket_name:
              return {'statusCode': 200, 'headers': headers, 'body': json.dumps({'answer': "Storage error: KB bucket not found."})}
-             
-        s3_uri = f"s3://{bucket_name}/clinical-guidelines-2024-ua.pdf"
+        
+        # Get all PDF files from the bucket (EXTERNAL_SOURCES supports up to 5 files)
+        try:
+            pdf_files = []
+            response = s3.list_objects_v2(Bucket=bucket_name)
+            for obj in response.get('Contents', []):
+                key = obj['Key']
+                if key.endswith('.pdf'):
+                    pdf_files.append(key)
+            print(f"DEBUG: Found {len(pdf_files)} PDF files in bucket")
+        except Exception as e:
+            print(f"S3 list error: {e}")
+            pdf_files = ['clinical-guidelines-2024-ua.pdf']  # Fallback to known file
+        
+        # Build sources list (max 5 for EXTERNAL_SOURCES API)
+        sources = []
+        for pdf_key in pdf_files[:5]:
+            sources.append({
+                'sourceType': 'S3',
+                's3Location': {
+                    'uri': f"s3://{bucket_name}/{pdf_key}"
+                }
+            })
+        
+        if not sources:
+            return {'statusCode': 200, 'headers': headers, 'body': json.dumps({'answer': "No training documents found in storage."})}
         
         # Use regional model ID as base for ARN
         region = 'eu-central-1'
@@ -151,14 +177,7 @@ def handle_ask(event, headers):
                     'type': 'EXTERNAL_SOURCES',
                     'externalSourcesConfiguration': {
                         'modelArn': model_arn,
-                        'sources': [
-                            {
-                                'sourceType': 'S3',
-                                's3Location': {
-                                    'uri': s3_uri
-                                }
-                            }
-                        ]
+                        'sources': sources
                     }
                 }
             )
@@ -216,8 +235,8 @@ def handle_quiz(event, headers):
             "top_p": 0.9
         })
 
-        # Invoke Llama 3 8B
-        model_id = 'us.meta.llama3-2-3b-instruct-v1:0'
+        # Invoke Llama 3 (EU region)
+        model_id = 'eu.meta.llama3-2-3b-instruct-v1:0'
         
         response = bedrock_runtime.invoke_model(
             modelId=model_id,
@@ -227,14 +246,25 @@ def handle_quiz(event, headers):
         response_body = json.loads(response.get('body').read())
         content_text = response_body['generation']
         
-        # Parse JSON from model output (handling potential mardown wrapper)
+        # Parse JSON from model output (handling potential markdown wrapper and preambles)
+        import re
         clean_json = content_text.strip()
-        if clean_json.startswith('```json'):
-            clean_json = clean_json.split('```json')[1].split('```')[0].strip()
-        elif clean_json.startswith('```'):
-            clean_json = clean_json.split('```')[1].split('```')[0].strip()
+        
+        # Try to find JSON block in markdown
+        json_match = re.search(r'```(?:json)?\s*(\{.*?\})\s*```', clean_json, re.DOTALL)
+        if json_match:
+            clean_json = json_match.group(1)
+        else:
+             # Fallback: Try to find the first { and last }
+            json_match = re.search(r'(\{.*\})', clean_json, re.DOTALL)
+            if json_match:
+                clean_json = json_match.group(1)
             
-        quiz_data = json.loads(clean_json)
+        try:
+            quiz_data = json.loads(clean_json)
+        except json.JSONDecodeError:
+            print(f"JSON Parse Error. Raw content: {content_text}")
+            raise
         
         return {'statusCode': 200, 'headers': headers, 'body': json.dumps(quiz_data)}
         
@@ -249,18 +279,72 @@ def handle_quiz(event, headers):
         }
         return {'statusCode': 200, 'headers': headers, 'body': json.dumps(fallback_quiz)}
 
+def handle_score_update(event, headers):
+    try:
+        body = json.loads(event.get('body', '{}'))
+        user_id = body.get('userId')
+        if not user_id:
+             return {'statusCode': 400, 'headers': headers, 'body': json.dumps({'error': 'userId required'})}
+
+        table = dynamodb.Table(USERS_TABLE)
+        response = table.update_item(
+            Key={'UserId': user_id},
+            UpdateExpression="ADD TotalScore :inc",
+            ExpressionAttributeValues={':inc': 100},
+            ReturnValues="UPDATED_NEW"
+        )
+        # Handle Decimal serialization format
+        from decimal import Decimal
+        class DecimalEncoder(json.JSONEncoder):
+            def default(self, obj):
+                if isinstance(obj, Decimal):
+                    return float(obj)
+                return super(DecimalEncoder, self).default(obj)
+
+        return {'statusCode': 200, 'headers': headers, 'body': json.dumps({
+            'message': 'Score updated', 
+            'newScore': response['Attributes']['TotalScore']
+        }, cls=DecimalEncoder)}
+    except Exception as e:
+        print(f"Score Update Error: {e}")
+        return {'statusCode': 500, 'headers': headers, 'body': json.dumps({'error': str(e)})}
+
 def handle_leaderboard(headers):
     table = dynamodb.Table(USERS_TABLE)
     try:
         # Scan or Query based on GSI
-        # For simplicity in prototype, using scan (requires optimization for production)
         response = table.scan(
             IndexName='TotalScoreIndex',
             Limit=10,
             ProjectionExpression='UserId, TotalScore'
         )
         items = response.get('Items', [])
-        # Sort manually if Scan doesn't sort by GSI (Scan doesn't sort)
+        
+        # Seed mock data if empty
+        if not items:
+            mock_users = [
+                {'UserId': 'Doc-1', 'TotalScore': 1500},
+                {'UserId': 'Medic-Alpha', 'TotalScore': 1200},
+                {'UserId': 'Combat-Lifesaver', 'TotalScore': 800},
+                {'UserId': 'Corpsman-X', 'TotalScore': 600},
+                {'UserId': 'Medic-Bravo', 'TotalScore': 400}
+            ]
+            try:
+                with table.batch_writer() as batch:
+                    for user in mock_users:
+                        batch.put_item(Item=user)
+                items = mock_users # Use mocks for immediate display
+            except Exception as seed_err:
+                print(f"Seeding Error: {seed_err}")
+
+        # Handle Decimal deserialization for existing DynamoDB items
+        for item in items:
+            if 'TotalScore' in item:
+                from decimal import Decimal
+                if isinstance(item['TotalScore'], Decimal):
+                    item['TotalScore'] = int(item['TotalScore'])
+
+        # Sort manually
         items.sort(key=lambda x: int(x.get('TotalScore', 0)), reverse=True)
         return {'statusCode': 200, 'headers': headers, 'body': json.dumps({'leaderboard': items})}
     except Exception as e:

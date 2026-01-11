@@ -1,0 +1,16 @@
+﻿{
+    "collectionDetails": [
+        {
+            "id": "afudncxh7dwboy26600d",
+            "name": "tacmed-kb-4850",
+            "status": "CREATING",
+            "type": "VECTORSEARCH",
+            "arn": "arn:aws:aoss:eu-central-1:168705873426:collection/afudncxh7dwboy26600d",
+            "kmsKeyArn": "auto",
+            "standbyReplicas": "ENABLED",
+            "createdDate": 1768056599873,
+            "lastModifiedDate": 1768056599873
+        }
+    ],
+    "collectionErrorDetails": []
+}

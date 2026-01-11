@@ -1,0 +1,1 @@
+{"type": "VECTOR", "vectorKnowledgeBaseConfiguration": {"embeddingModelArn": "arn:aws:bedrock:eu-central-1::foundation-model/amazon.titan-embed-text-v2:0"}}

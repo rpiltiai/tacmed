@@ -1,0 +1,1 @@
+﻿arn:aws:iam::168705873426:role/TacMed_KB_Role

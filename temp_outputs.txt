@@ -1,0 +1,11 @@
+﻿{
+    "KbBucket":  "tacmed-kb-4850",
+    "WebBucket":  "tacmed-web-4850",
+    "UserPoolId":  "eu-central-1_J3jhLeL49",
+    "ApiEndpoint":  "https://twtb8kdn28.execute-api.eu-central-1.amazonaws.com",
+    "ApiId":  "twtb8kdn28",
+    "AccountId":  "168705873426",
+    "ClientId":  "1av0famvuo8phcsfovn1lkj49p",
+    "CloudFrontDomain":  "https://du273q9lqplms.cloudfront.net",
+    "CloudFrontId":  "E3TYUY6VE3PCRK"
+}

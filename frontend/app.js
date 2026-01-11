@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initCognito();
     setupEventListeners();
     checkSession();
+    loadLeaderboard();
 });
 
 function initCognito() {
@@ -280,7 +281,26 @@ function renderQuizQuestion(data) {
     quizArea.innerHTML = html;
 }
 
-window.checkAnswer = function (selected, correct, explanation) {
+async function updateScore() {
+    if (!currentUser) return 'GUEST';
+    try {
+        const username = currentUser.getUsername();
+        const res = await fetch(`${CONFIG.ApiEndpoint}/score`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ userId: username })
+        });
+        const data = await res.json();
+        console.log("Score updated:", data);
+        loadLeaderboard();
+        return data.newScore;
+    } catch (e) {
+        console.error("Score update failed:", e);
+        return null;
+    }
+}
+
+window.checkAnswer = async function (selected, correct, explanation) {
     const feedback = document.getElementById('quiz-feedback');
     const buttons = document.querySelectorAll('.btn-option');
 
@@ -291,8 +311,15 @@ window.checkAnswer = function (selected, correct, explanation) {
     });
 
     if (selected === correct) {
-        feedback.innerHTML = `<div class="feedback success">Correct! ${explanation}</div>`;
-        // TODO: Update score
+        feedback.innerHTML = `<div class="feedback success">Correct! ${explanation} <br><strong>+100 XP</strong></div>`;
+        const newScore = await updateScore();
+        if (newScore === 'GUEST') {
+            feedback.innerHTML += `<div class="score-update" style="margin-top: 5px; color: #fbbf24; font-size: 0.9em;">(Login to save score)</div>`;
+        } else if (newScore !== null) {
+            feedback.innerHTML += `<div class="score-update" style="margin-top: 5px; font-weight: bold; color: #4ade80;">Total Score: ${newScore}</div>`;
+        } else {
+            feedback.innerHTML += `<div class="score-update" style="margin-top: 5px; color: #f87171; font-size: 0.9em;">(Error saving score)</div>`;
+        }
     } else {
         feedback.innerHTML = `<div class="feedback failure">Incorrect. ${explanation}</div>`;
     }

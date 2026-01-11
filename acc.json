@@ -1,0 +1,26 @@
+{
+    "Principal":  [
+                      "arn:aws:iam::/TacMed_KB_Role",
+                      "arn:aws:iam::/roman-dev"
+                  ],
+    "Rules":  [
+                  {
+                      "ResourceType":  "collection",
+                      "Resource":  [
+                                       "collection/tacmed-rag-v2"
+                                   ],
+                      "Permission":  [
+                                         "aoss:*"
+                                     ]
+                  },
+                  {
+                      "ResourceType":  "index",
+                      "Resource":  [
+                                       "index/tacmed-rag-v2/*"
+                                   ],
+                      "Permission":  [
+                                         "aoss:*"
+                                     ]
+                  }
+              ]
+}

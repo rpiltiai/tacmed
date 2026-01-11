@@ -1,0 +1,47 @@
+﻿Testing URL: https://twtb8kdn28.execute-api.eu-central-1.amazonaws.com/quiz
+
+Request 1...
+Status: 200
+RESULT: SUCCESS (Generated)
+{
+  "question": "A soldier is injured by a blast and has a severe chest wound. They are bleeding profusely and showing signs of hypovolemic shock. What is the first step in treating this soldier?",
+  "options": [
+    "Apply a tourniquet to the affected limb",
+    "Apply a hemostatic dressing to the wound",
+    "Administer oxygen and start IV fluids",
+    "Call for medical evacuation and stabilize the soldier for transport"
+  ],
+  "correct_index": 3,
+  "explanation": "Calling for medical evacuation and stabilizing the soldier for transport is the first step in treating a severely injured soldier, as it ensures the soldier receives the medical care they need as soon as possible, while also prioritizing their safety and preventing further injury."
+}
+
+Request 2...
+Status: 200
+RESULT: SUCCESS (Generated)
+{
+  "question": "A soldier is shot in the leg and is bleeding profusely. The soldier is conscious and able to move the affected limb. What is the first step in treating the casualty?",
+  "options": [
+    "Apply a tourniquet above the wound",
+    "Apply a hemostatic agent to the wound",
+    "Stop the bleeding by applying direct pressure to the wound",
+    "Immobilize the affected limb with a splint"
+  ],
+  "correct_index": 0,
+  "explanation": "The first step in treating a bleeding casualty is to stop the bleeding by applying direct pressure to the wound. This is the 'M' in MARCH, which stands for 'Make a massive pressure application'."
+}
+
+Request 3...
+Status: 200
+RESULT: SUCCESS (Generated)
+{
+  "question": "A soldier is shot in the arm and is bleeding profusely. The soldier's airway is clear and they are able to speak. What is the first step in treating this casualty?",
+  "options": [
+    "Stop the bleeding",
+    "Assess the airway",
+    "Call for medical evacuation",
+    "Administer pain medication"
+  ],
+  "correct_index": 0,
+  "explanation": "The first step in treating a casualty is to stop the bleeding, as uncontrolled bleeding can lead to hypovolemic shock."
+}
+

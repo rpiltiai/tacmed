@@ -1,0 +1,216 @@
+﻿{
+    "events": [
+        {
+            "logStreamName": "2026/01/10/[$LATEST]a04aea3c2d064299a6378a49800b4731",
+            "timestamp": 1768058519086,
+            "message": "INIT_START Runtime Version: python:3.12.v101\tRuntime Version ARN: arn:aws:lambda:eu-central-1::runtime:994aac32248ecf4d69d9f5e9a3a57aba3ccea19d94170a61d5ecf978927e1b0f\n",
+            "ingestionTime": 1768058522570,
+            "eventId": "39429022530228278616981854623436655694073925783133749248"
+        },
+        {
+            "logStreamName": "2026/01/10/[$LATEST]a04aea3c2d064299a6378a49800b4731",
+            "timestamp": 1768058519676,
+            "message": "START RequestId: 415949d3-aff1-45c3-a26f-80ac543e2087 Version: $LATEST\n",
+            "ingestionTime": 1768058522570,
+            "eventId": "39429022543385718284114922276942729474936459071662194689"
+        },
+        {
+            "logStreamName": "2026/01/10/[$LATEST]a04aea3c2d064299a6378a49800b4731",
+            "timestamp": 1768058519677,
+            "message": "Event: {\"version\": \"2.0\", \"routeKey\": \"POST /quiz\", \"rawPath\": \"/quiz\", \"rawQueryString\": \"\", \"headers\": {\"content-length\": \"0\", \"content-type\": \"application/json\", \"host\": \"twtb8kdn28.execute-api.eu-central-1.amazonaws.com\", \"user-agent\": \"Mozilla/5.0 (Windows NT; Windows NT 10.0; en-US) WindowsPowerShell/5.1.26100.7462\", \"x-amzn-trace-id\": \"Root=1-69626e96-00afcf176f11b9755e651578\", \"x-forwarded-for\": \"194.39.227.110\", \"x-forwarded-port\": \"443\", \"x-forwarded-proto\": \"https\"}, \"requestContext\": {\"accountId\": \"168705873426\", \"apiId\": \"twtb8kdn28\", \"domainName\": \"twtb8kdn28.execute-api.eu-central-1.amazonaws.com\", \"domainPrefix\": \"twtb8kdn28\", \"http\": {\"method\": \"POST\", \"path\": \"/quiz\", \"protocol\": \"HTTP/1.1\", \"sourceIp\": \"194.39.227.110\", \"userAgent\": \"Mozilla/5.0 (Windows NT; Windows NT 10.0; en-US) WindowsPowerShell/5.1.26100.7462\"}, \"requestId\": \"W-Y3ogmxliAEMXw=\", \"routeKey\": \"POST /quiz\", \"stage\": \"$default\", \"time\": \"10/Jan/2026:15:21:58 +0000\", \"timeEpoch\": 1768058518899}, \"isBase64Encoded\": false}\n",
+            "ingestionTime": 1768058522570,
+            "eventId": "39429022543408019029313452900084265193209107433168175106"
+        },
+        {
+            "logStreamName": "2026/01/10/[$LATEST]a04aea3c2d064299a6378a49800b4731",
+            "timestamp": 1768058519970,
+            "message": "Bedrock Error: An error occurred (ValidationException) when calling the InvokeModel operation: The provided model identifier is invalid.\n",
+            "ingestionTime": 1768058522570,
+            "eventId": "39429022549942137372482925480554230647095077354420436995"
+        },
+        {
+            "logStreamName": "2026/01/10/[$LATEST]a04aea3c2d064299a6378a49800b4731",
+            "timestamp": 1768058519980,
+            "message": "END RequestId: 415949d3-aff1-45c3-a26f-80ac543e2087\n",
+            "ingestionTime": 1768058522570,
+            "eventId": "39429022550165144824468231711969587829821560969480241156"
+        },
+        {
+            "logStreamName": "2026/01/10/[$LATEST]a04aea3c2d064299a6378a49800b4731",
+            "timestamp": 1768058519980,
+            "message": "REPORT RequestId: 415949d3-aff1-45c3-a26f-80ac543e2087\tDuration: 302.99 ms\tBilled Duration: 889 ms\tMemory Size: 128 MB\tMax Memory Used: 97 MB\tInit Duration: 585.39 ms\t\n",
+            "ingestionTime": 1768058522570,
+            "eventId": "39429022550165144824468231711969587829821560969480241157"
+        },
+        {
+            "logStreamName": "2026/01/10/[$LATEST]9da7b3e465474f39bb4d36f22cd8fe00",
+            "timestamp": 1768058597807,
+            "message": "INIT_START Runtime Version: python:3.12.v101\tRuntime Version ARN: arn:aws:lambda:eu-central-1::runtime:994aac32248ecf4d69d9f5e9a3a57aba3ccea19d94170a61d5ecf978927e1b0f\n",
+            "ingestionTime": 1768058606755,
+            "eventId": "39429024285765241390511039050043459225735408197229674496"
+        },
+        {
+            "logStreamName": "2026/01/10/[$LATEST]9da7b3e465474f39bb4d36f22cd8fe00",
+            "timestamp": 1768058598511,
+            "message": "START RequestId: 6d6ac2e5-4c9d-4ab5-86a2-f0af83490c01 Version: $LATEST\n",
+            "ingestionTime": 1768058606755,
+            "eventId": "39429024301464966010276597741684604889679854697439887361"
+        },
+        {
+            "logStreamName": "2026/01/10/[$LATEST]9da7b3e465474f39bb4d36f22cd8fe00",
+            "timestamp": 1768058598512,
+            "message": "Event: {\"version\": \"2.0\", \"routeKey\": \"POST /quiz\", \"rawPath\": \"/quiz\", \"rawQueryString\": \"\", \"headers\": {\"content-length\": \"0\", \"content-type\": \"application/json\", \"host\": \"twtb8kdn28.execute-api.eu-central-1.amazonaws.com\", \"user-agent\": \"Mozilla/5.0 (Windows NT; Windows NT 10.0; en-US) WindowsPowerShell/5.1.26100.7462\", \"x-amzn-trace-id\": \"Root=1-69626ee5-1f7782bd2e32516809f78345\", \"x-forwarded-for\": \"194.39.227.110\", \"x-forwarded-port\": \"443\", \"x-forwarded-proto\": \"https\"}, \"requestContext\": {\"accountId\": \"168705873426\", \"apiId\": \"twtb8kdn28\", \"domainName\": \"twtb8kdn28.execute-api.eu-central-1.amazonaws.com\", \"domainPrefix\": \"twtb8kdn28\", \"http\": {\"method\": \"POST\", \"path\": \"/quiz\", \"protocol\": \"HTTP/1.1\", \"sourceIp\": \"194.39.227.110\", \"userAgent\": \"Mozilla/5.0 (Windows NT; Windows NT 10.0; en-US) WindowsPowerShell/5.1.26100.7462\"}, \"requestId\": \"W-ZD8ioaFiAEM7Q=\", \"routeKey\": \"POST /quiz\", \"stage\": \"$default\", \"time\": \"10/Jan/2026:15:23:17 +0000\", \"timeEpoch\": 1768058597618}, \"isBase64Encoded\": false}\n",
+            "ingestionTime": 1768058606755,
+            "eventId": "39429024301487266755475128364826140607952503058945867778"
+        },
+        {
+            "logStreamName": "2026/01/10/[$LATEST]9da7b3e465474f39bb4d36f22cd8fe00",
+            "timestamp": 1768058602499,
+            "message": "END RequestId: 6d6ac2e5-4c9d-4ab5-86a2-f0af83490c01\n",
+            "ingestionTime": 1768058606755,
+            "eventId": "39429024390400337862016722830129049361001520383289786371"
+        },
+        {
+            "logStreamName": "2026/01/10/[$LATEST]9da7b3e465474f39bb4d36f22cd8fe00",
+            "timestamp": 1768058602499,
+            "message": "REPORT RequestId: 6d6ac2e5-4c9d-4ab5-86a2-f0af83490c01\tDuration: 3987.38 ms\tBilled Duration: 4684 ms\tMemory Size: 128 MB\tMax Memory Used: 94 MB\tInit Duration: 695.97 ms\t\n",
+            "ingestionTime": 1768058606755,
+            "eventId": "39429024390400337862016722830129049361001520383289786372"
+        },
+        {
+            "logStreamName": "2026/01/10/[$LATEST]9da7b3e465474f39bb4d36f22cd8fe00",
+            "timestamp": 1768058615616,
+            "message": "START RequestId: 28d1ee87-78e0-4248-bfcf-fb87c7e989dc Version: $LATEST\n",
+            "ingestionTime": 1768058624635,
+            "eventId": "39429024682919212631142906599268938578181249918403215360"
+        },
+        {
+            "logStreamName": "2026/01/10/[$LATEST]9da7b3e465474f39bb4d36f22cd8fe00",
+            "timestamp": 1768058615617,
+            "message": "Event: {\"version\": \"2.0\", \"routeKey\": \"GET /leaderboard\", \"rawPath\": \"/leaderboard\", \"rawQueryString\": \"\", \"headers\": {\"accept\": \"*/*\", \"accept-encoding\": \"gzip, deflate, br, zstd\", \"accept-language\": \"uk-UA,uk;q=0.9,ru;q=0.8,en-US;q=0.7,en;q=0.6\", \"content-length\": \"0\", \"host\": \"twtb8kdn28.execute-api.eu-central-1.amazonaws.com\", \"origin\": \"https://du273q9lqplms.cloudfront.net\", \"priority\": \"u=1, i\", \"referer\": \"https://du273q9lqplms.cloudfront.net/\", \"sec-ch-ua\": \"\\\"Chromium\\\";v=\\\"142\\\", \\\"Google Chrome\\\";v=\\\"142\\\", \\\"Not_A Brand\\\";v=\\\"99\\\"\", \"sec-ch-ua-mobile\": \"?0\", \"sec-ch-ua-platform\": \"\\\"Windows\\\"\", \"sec-fetch-dest\": \"empty\", \"sec-fetch-mode\": \"cors\", \"sec-fetch-site\": \"cross-site\", \"user-agent\": \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36\", \"x-amzn-trace-id\": \"Root=1-69626ef7-13ab2cde37f6e8613367a2b3\", \"x-forwarded-for\": \"194.39.227.110\", \"x-forwarded-port\": \"443\", \"x-forwarded-proto\": \"https\"}, \"requestContext\": {\"accountId\": \"168705873426\", \"apiId\": \"twtb8kdn28\", \"domainName\": \"twtb8kdn28.execute-api.eu-central-1.amazonaws.com\", \"domainPrefix\": \"twtb8kdn28\", \"http\": {\"method\": \"GET\", \"path\": \"/leaderboard\", \"protocol\": \"HTTP/1.1\", \"sourceIp\": \"194.39.227.110\", \"userAgent\": \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36\"}, \"requestId\": \"W-ZGviwcFiAEPiA=\", \"routeKey\": \"GET /leaderboard\", \"stage\": \"$default\", \"time\": \"10/Jan/2026:15:23:35 +0000\", \"timeEpoch\": 1768058615581}, \"isBase64Encoded\": false}\n",
+            "ingestionTime": 1768058624635,
+            "eventId": "39429024682941513376341437222410474296453898279909195777"
+        },
+        {
+            "logStreamName": "2026/01/10/[$LATEST]9da7b3e465474f39bb4d36f22cd8fe00",
+            "timestamp": 1768058615840,
+            "message": "END RequestId: 28d1ee87-78e0-4248-bfcf-fb87c7e989dc\n",
+            "ingestionTime": 1768058624635,
+            "eventId": "39429024687914579555613766182972939471254482895742828546"
+        },
+        {
+            "logStreamName": "2026/01/10/[$LATEST]9da7b3e465474f39bb4d36f22cd8fe00",
+            "timestamp": 1768058615840,
+            "message": "REPORT RequestId: 28d1ee87-78e0-4248-bfcf-fb87c7e989dc\tDuration: 223.53 ms\tBilled Duration: 224 ms\tMemory Size: 128 MB\tMax Memory Used: 95 MB\t\n",
+            "ingestionTime": 1768058624635,
+            "eventId": "39429024687914579555613766182972939471254482895742828547"
+        },
+        {
+            "logStreamName": "2026/01/10/[$LATEST]9da7b3e465474f39bb4d36f22cd8fe00",
+            "timestamp": 1768058618923,
+            "message": "START RequestId: cb47be04-94bf-44df-93fc-01d111d66bc0 Version: $LATEST\n",
+            "ingestionTime": 1768058624635,
+            "eventId": "39429024756667777002683677328327558905829381418680451076"
+        },
+        {
+            "logStreamName": "2026/01/10/[$LATEST]9da7b3e465474f39bb4d36f22cd8fe00",
+            "timestamp": 1768058618925,
+            "message": "Event: {\"version\": \"2.0\", \"routeKey\": \"POST /quiz\", \"rawPath\": \"/quiz\", \"rawQueryString\": \"\", \"headers\": {\"accept\": \"*/*\", \"accept-encoding\": \"gzip, deflate, br, zstd\", \"accept-language\": \"uk-UA,uk;q=0.9,ru;q=0.8,en-US;q=0.7,en;q=0.6\", \"content-length\": \"0\", \"content-type\": \"application/json\", \"host\": \"twtb8kdn28.execute-api.eu-central-1.amazonaws.com\", \"origin\": \"https://du273q9lqplms.cloudfront.net\", \"priority\": \"u=1, i\", \"referer\": \"https://du273q9lqplms.cloudfront.net/\", \"sec-ch-ua\": \"\\\"Chromium\\\";v=\\\"142\\\", \\\"Google Chrome\\\";v=\\\"142\\\", \\\"Not_A Brand\\\";v=\\\"99\\\"\", \"sec-ch-ua-mobile\": \"?0\", \"sec-ch-ua-platform\": \"\\\"Windows\\\"\", \"sec-fetch-dest\": \"empty\", \"sec-fetch-mode\": \"cors\", \"sec-fetch-site\": \"cross-site\", \"user-agent\": \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36\", \"x-amzn-trace-id\": \"Root=1-69626efa-6784b31326e294461fa6b14a\", \"x-forwarded-for\": \"194.39.227.110\", \"x-forwarded-port\": \"443\", \"x-forwarded-proto\": \"https\"}, \"requestContext\": {\"accountId\": \"168705873426\", \"apiId\": \"twtb8kdn28\", \"domainName\": \"twtb8kdn28.execute-api.eu-central-1.amazonaws.com\", \"domainPrefix\": \"twtb8kdn28\", \"http\": {\"method\": \"POST\", \"path\": \"/quiz\", \"protocol\": \"HTTP/1.1\", \"sourceIp\": \"194.39.227.110\", \"userAgent\": \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36\"}, \"requestId\": \"W-ZHRhEuFiAEPlw=\", \"routeKey\": \"POST /quiz\", \"stage\": \"$default\", \"time\": \"10/Jan/2026:15:23:38 +0000\", \"timeEpoch\": 1768058618906}, \"isBase64Encoded\": false}\n",
+            "ingestionTime": 1768058624635,
+            "eventId": "39429024756712378493080738574610630342374678141692411909"
+        },
+        {
+            "logStreamName": "2026/01/10/[$LATEST]9da7b3e465474f39bb4d36f22cd8fe00",
+            "timestamp": 1768058621834,
+            "message": "END RequestId: cb47be04-94bf-44df-93fc-01d111d66bc0\n",
+            "ingestionTime": 1768058624635,
+            "eventId": "39429024821585246275606321293338034797508761762589442054"
+        },
+        {
+            "logStreamName": "2026/01/10/[$LATEST]9da7b3e465474f39bb4d36f22cd8fe00",
+            "timestamp": 1768058621834,
+            "message": "REPORT RequestId: cb47be04-94bf-44df-93fc-01d111d66bc0\tDuration: 2910.47 ms\tBilled Duration: 2911 ms\tMemory Size: 128 MB\tMax Memory Used: 95 MB\t\n",
+            "ingestionTime": 1768058624635,
+            "eventId": "39429024821585246275606321293338034797508761762589442055"
+        },
+        {
+            "logStreamName": "2026/01/10/[$LATEST]9da7b3e465474f39bb4d36f22cd8fe00",
+            "timestamp": 1768058632091,
+            "message": "START RequestId: 891f2a9c-24b1-475f-847f-4a42e2a98702 Version: $LATEST\n",
+            "ingestionTime": 1768058641106,
+            "eventId": "39429025050323989776934922875981744246586205171795427328"
+        },
+        {
+            "logStreamName": "2026/01/10/[$LATEST]9da7b3e465474f39bb4d36f22cd8fe00",
+            "timestamp": 1768058632093,
+            "message": "Event: {\"version\": \"2.0\", \"routeKey\": \"POST /quiz\", \"rawPath\": \"/quiz\", \"rawQueryString\": \"\", \"headers\": {\"accept\": \"*/*\", \"accept-encoding\": \"gzip, deflate, br, zstd\", \"accept-language\": \"uk-UA,uk;q=0.9,ru;q=0.8,en-US;q=0.7,en;q=0.6\", \"content-length\": \"0\", \"content-type\": \"application/json\", \"host\": \"twtb8kdn28.execute-api.eu-central-1.amazonaws.com\", \"origin\": \"https://du273q9lqplms.cloudfront.net\", \"priority\": \"u=1, i\", \"referer\": \"https://du273q9lqplms.cloudfront.net/\", \"sec-ch-ua\": \"\\\"Chromium\\\";v=\\\"142\\\", \\\"Google Chrome\\\";v=\\\"142\\\", \\\"Not_A Brand\\\";v=\\\"99\\\"\", \"sec-ch-ua-mobile\": \"?0\", \"sec-ch-ua-platform\": \"\\\"Windows\\\"\", \"sec-fetch-dest\": \"empty\", \"sec-fetch-mode\": \"cors\", \"sec-fetch-site\": \"cross-site\", \"user-agent\": \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36\", \"x-amzn-trace-id\": \"Root=1-69626f08-182dd878608f93e77be684c2\", \"x-forwarded-for\": \"194.39.227.110\", \"x-forwarded-port\": \"443\", \"x-forwarded-proto\": \"https\"}, \"requestContext\": {\"accountId\": \"168705873426\", \"apiId\": \"twtb8kdn28\", \"domainName\": \"twtb8kdn28.execute-api.eu-central-1.amazonaws.com\", \"domainPrefix\": \"twtb8kdn28\", \"http\": {\"method\": \"POST\", \"path\": \"/quiz\", \"protocol\": \"HTTP/1.1\", \"sourceIp\": \"194.39.227.110\", \"userAgent\": \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36\"}, \"requestId\": \"W-ZJUirUFiAEPzg=\", \"routeKey\": \"POST /quiz\", \"stage\": \"$default\", \"time\": \"10/Jan/2026:15:23:52 +0000\", \"timeEpoch\": 1768058632070}, \"isBase64Encoded\": false}\n",
+            "ingestionTime": 1768058641106,
+            "eventId": "39429025050368591267331984122264815683131501894807388161"
+        },
+        {
+            "logStreamName": "2026/01/10/[$LATEST]9da7b3e465474f39bb4d36f22cd8fe00",
+            "timestamp": 1768058635321,
+            "message": "Bedrock Error: Expecting ',' delimiter: line 10 column 248 (char 790)\n",
+            "ingestionTime": 1768058641106,
+            "eventId": "39429025122355396768188835623142114267240412836112171010"
+        },
+        {
+            "logStreamName": "2026/01/10/[$LATEST]9da7b3e465474f39bb4d36f22cd8fe00",
+            "timestamp": 1768058635324,
+            "message": "END RequestId: 891f2a9c-24b1-475f-847f-4a42e2a98702\n",
+            "ingestionTime": 1768058641106,
+            "eventId": "39429025122422299003784427492566721422058357920630112259"
+        },
+        {
+            "logStreamName": "2026/01/10/[$LATEST]9da7b3e465474f39bb4d36f22cd8fe00",
+            "timestamp": 1768058635324,
+            "message": "REPORT RequestId: 891f2a9c-24b1-475f-847f-4a42e2a98702\tDuration: 3231.83 ms\tBilled Duration: 3232 ms\tMemory Size: 128 MB\tMax Memory Used: 95 MB\t\n",
+            "ingestionTime": 1768058641106,
+            "eventId": "39429025122422299003784427492566721422058357920630112260"
+        },
+        {
+            "logStreamName": "2026/01/10/[$LATEST]9da7b3e465474f39bb4d36f22cd8fe00",
+            "timestamp": 1768058643861,
+            "message": "START RequestId: 80fa39b5-d19d-496d-a9f9-9d7824d1d74a Version: $LATEST\n",
+            "ingestionTime": 1768058652881,
+            "eventId": "39429025312803760763640357266092289377781350301680336896"
+        },
+        {
+            "logStreamName": "2026/01/10/[$LATEST]9da7b3e465474f39bb4d36f22cd8fe00",
+            "timestamp": 1768058643863,
+            "message": "Event: {\"version\": \"2.0\", \"routeKey\": \"POST /quiz\", \"rawPath\": \"/quiz\", \"rawQueryString\": \"\", \"headers\": {\"accept\": \"*/*\", \"accept-encoding\": \"gzip, deflate, br, zstd\", \"accept-language\": \"uk-UA,uk;q=0.9,ru;q=0.8,en-US;q=0.7,en;q=0.6\", \"content-length\": \"0\", \"content-type\": \"application/json\", \"host\": \"twtb8kdn28.execute-api.eu-central-1.amazonaws.com\", \"origin\": \"https://du273q9lqplms.cloudfront.net\", \"priority\": \"u=1, i\", \"referer\": \"https://du273q9lqplms.cloudfront.net/\", \"sec-ch-ua\": \"\\\"Chromium\\\";v=\\\"142\\\", \\\"Google Chrome\\\";v=\\\"142\\\", \\\"Not_A Brand\\\";v=\\\"99\\\"\", \"sec-ch-ua-mobile\": \"?0\", \"sec-ch-ua-platform\": \"\\\"Windows\\\"\", \"sec-fetch-dest\": \"empty\", \"sec-fetch-mode\": \"cors\", \"sec-fetch-site\": \"cross-site\", \"user-agent\": \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36\", \"x-amzn-trace-id\": \"Root=1-69626f13-55a6036a58c71e524a3fdf42\", \"x-forwarded-for\": \"194.39.227.110\", \"x-forwarded-port\": \"443\", \"x-forwarded-proto\": \"https\"}, \"requestContext\": {\"accountId\": \"168705873426\", \"apiId\": \"twtb8kdn28\", \"domainName\": \"twtb8kdn28.execute-api.eu-central-1.amazonaws.com\", \"domainPrefix\": \"twtb8kdn28\", \"http\": {\"method\": \"POST\", \"path\": \"/quiz\", \"protocol\": \"HTTP/1.1\", \"sourceIp\": \"194.39.227.110\", \"userAgent\": \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36\"}, \"requestId\": \"W-ZLKjZHliAEPBQ=\", \"routeKey\": \"POST /quiz\", \"stage\": \"$default\", \"time\": \"10/Jan/2026:15:24:03 +0000\", \"timeEpoch\": 1768058643841}, \"isBase64Encoded\": false}\n",
+            "ingestionTime": 1768058652881,
+            "eventId": "39429025312848362254037418512375360814326647024692297729"
+        },
+        {
+            "logStreamName": "2026/01/10/[$LATEST]9da7b3e465474f39bb4d36f22cd8fe00",
+            "timestamp": 1768058646984,
+            "message": "END RequestId: 80fa39b5-d19d-496d-a9f9-9d7824d1d74a\n",
+            "ingestionTime": 1768058652881,
+            "eventId": "39429025382448988018651493337108337543262183284857176066"
+        },
+        {
+            "logStreamName": "2026/01/10/[$LATEST]9da7b3e465474f39bb4d36f22cd8fe00",
+            "timestamp": 1768058646984,
+            "message": "REPORT RequestId: 80fa39b5-d19d-496d-a9f9-9d7824d1d74a\tDuration: 3122.22 ms\tBilled Duration: 3123 ms\tMemory Size: 128 MB\tMax Memory Used: 95 MB\t\n",
+            "ingestionTime": 1768058652881,
+            "eventId": "39429025382448988018651493337108337543262183284857176067"
+        },
+        {
+            "logStreamName": "2026/01/10/[$LATEST]9da7b3e465474f39bb4d36f22cd8fe00",
+            "timestamp": 1768058654592,
+            "message": "START RequestId: 2f04030b-f1f6-4369-a01a-b13233251ca4 Version: $LATEST\n",
+            "ingestionTime": 1768058663611,
+            "eventId": "39429025552113057489072474210884176300129319304380940288"
+        },
+        {
+            "logStreamName": "2026/01/10/[$LATEST]9da7b3e465474f39bb4d36f22cd8fe00",
+            "timestamp": 1768058654592,
+            "message": "Event: {\"version\": \"2.0\", \"routeKey\": \"POST /quiz\", \"rawPath\": \"/quiz\", \"rawQueryString\": \"\", \"headers\": {\"accept\": \"*/*\", \"accept-encoding\": \"gzip, deflate, br, zstd\", \"accept-language\": \"uk-UA,uk;q=0.9,ru;q=0.8,en-US;q=0.7,en;q=0.6\", \"content-length\": \"0\", \"content-type\": \"application/json\", \"host\": \"twtb8kdn28.execute-api.eu-central-1.amazonaws.com\", \"origin\": \"https://du273q9lqplms.cloudfront.net\", \"priority\": \"u=1, i\", \"referer\": \"https://du273q9lqplms.cloudfront.net/\", \"sec-ch-ua\": \"\\\"Chromium\\\";v=\\\"142\\\", \\\"Google Chrome\\\";v=\\\"142\\\", \\\"Not_A Brand\\\";v=\\\"99\\\"\", \"sec-ch-ua-mobile\": \"?0\", \"sec-ch-ua-platform\": \"\\\"Windows\\\"\", \"sec-fetch-dest\": \"empty\", \"sec-fetch-mode\": \"cors\", \"sec-fetch-site\": \"cross-site\", \"user-agent\": \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36\", \"x-amzn-trace-id\": \"Root=1-69626f1e-1d2fab9a7d64209f6c97f892\", \"x-forwarded-for\": \"194.39.227.110\", \"x-forwarded-port\": \"443\", \"x-forwarded-proto\": \"https\"}, \"requestContext\": {\"accountId\": \"168705873426\", \"apiId\": \"twtb8kdn28\", \"domainName\": \"twtb8kdn28.execute-api.eu-central-1.amazonaws.com\", \"domainPrefix\": \"twtb8kdn28\", \"http\": {\"method\": \"POST\", \"path\": \"/quiz\", \"protocol\": \"HTTP/1.1\", \"sourceIp\": \"194.39.227.110\", \"userAgent\": \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36\"}, \"requestId\": \"W-ZM1hMYliAEMZg=\", \"routeKey\": \"POST /quiz\", \"stage\": \"$default\", \"time\": \"10/Jan/2026:15:24:14 +0000\", \"timeEpoch\": 1768058654578}, \"isBase64Encoded\": false}\n",
+            "ingestionTime": 1768058663611,
+            "eventId": "39429025552113057489072474210884176300129319304380940289"
+        }
+    ],
+    "searchedLogStreams": [],
+    "nextToken": "Bxkq6kVGFtq2y_MoigeqscPOdhXVbhiVtLoAmXb5jCql0vTll5VOrm4nLKwm_ZjOdTsNuXfDt5M1HK12xyXoXFe0n_tltuWMJgQYj4oE8xMsaWdXa1iNoAb7zyPBsqJU2PIuFsOpflzdQEIOC4EGLn_IvNGUgaFiWJKcf-5MVO6uQDigaMJSr_NiDDm3No68kOsjZC0G6TE9jIq7CwJDntAzu7sj4-AlN1eNUaU9kjvA_oMZhlCXOTITOFeXC6ZvTbWBN5KhQMTKvQsF9atvkDIzIeN5Ls71OgpOFUTMP6v2ej2lMBqkz18Uvpg7A-u-8CEV0ZyJhJ7mDL1zkzzFsJHk38rNfyl47f8lgxtyL_A"
+}

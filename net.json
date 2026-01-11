@@ -1,0 +1,17 @@
+{
+    "AllowFromPublic":  true,
+    "Rules":  [
+                  {
+                      "Resource":  [
+                                       "collection/tacmed-rag-v2"
+                                   ],
+                      "ResourceType":  "collection"
+                  },
+                  {
+                      "Resource":  [
+                                       "collection/tacmed-rag-v2"
+                                   ],
+                      "ResourceType":  "dashboard"
+                  }
+              ]
+}

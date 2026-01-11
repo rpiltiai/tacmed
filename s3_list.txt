@@ -1,0 +1,20 @@
+﻿2025-12-22 18:03:38      53426 audio-temp/audio_20251222160337.webm
+2025-12-22 18:18:27      63086 audio-temp/audio_20251222161826.webm
+2025-12-22 18:40:48       3194 audio-temp/audio_20251222164047.webm
+2025-12-22 18:40:57      30242 audio-temp/audio_20251222164056.webm
+2025-12-22 18:41:15      34106 audio-temp/audio_20251222164113.webm
+2025-12-22 18:42:53      36038 audio-temp/audio_20251222164252.webm
+2025-12-22 18:44:40      13820 audio-temp/audio_20251222164439.webm
+2025-12-22 18:45:37      20582 audio-temp/audio_20251222164536.webm
+2025-12-22 18:45:56      49562 audio-temp/audio_20251222164555.webm
+2026-01-10 16:26:56    3107946 clinical-guidelines-2024-en-ua.pdf
+2026-01-10 16:26:56     234270 clinical-guidelines-2024-ua (1).pdf
+2025-12-28 16:02:53     234270 clinical-guidelines-2024-ua.pdf
+2026-01-10 16:26:54   20921534 introduction-to-tccc-asm-didactic-presentation-en.pdf
+2026-01-10 16:26:56    1586704 pidgotovka_cbrn_dovidnyk-2.pdf
+2026-01-10 16:26:56     827783 tacevac-guidelines-ua.pdf
+2026-01-10 16:26:56   11830253 tccc-asm-didactic-presentation-ua.pdf
+2026-01-10 16:26:54    5671875 ????????? 1_2_3_?????? ???? ??? 2025-2.pdf
+2026-01-10 16:26:56     573718 ???????????? ???????? ? ?????? ???????? ???? 2025-2.pdf
+2026-01-10 16:26:56   23768574 ?????? ??????-4 (1).pdf
+2026-01-10 16:27:02   23768574 ?????? ??????-4.pdf

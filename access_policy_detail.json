@@ -1,0 +1,45 @@
+﻿{
+    "accessPolicyDetail": {
+        "type": "data",
+        "name": "tacmed-kb-4850-access",
+        "policyVersion": "MTc2ODA1NjYyOTE5NV8x",
+        "policy": [
+            {
+                "Rules": [
+                    {
+                        "Resource": [
+                            "collection/tacmed-kb-4850"
+                        ],
+                        "Permission": [
+                            "aoss:CreateCollectionItems",
+                            "aoss:DeleteCollectionItems",
+                            "aoss:UpdateCollectionItems",
+                            "aoss:DescribeCollectionItems"
+                        ],
+                        "ResourceType": "collection"
+                    },
+                    {
+                        "Resource": [
+                            "index/tacmed-kb-4850/*"
+                        ],
+                        "Permission": [
+                            "aoss:CreateIndex",
+                            "aoss:DeleteIndex",
+                            "aoss:UpdateIndex",
+                            "aoss:DescribeIndex",
+                            "aoss:ReadDocument",
+                            "aoss:WriteDocument"
+                        ],
+                        "ResourceType": "index"
+                    }
+                ],
+                "Principal": [
+                    "arn:aws:iam::168705873426:role/TacMed_KB_Role",
+                    "arn:aws:iam::168705873426:user/roman-dev"
+                ]
+            }
+        ],
+        "createdDate": 1768056629195,
+        "lastModifiedDate": 1768056629195
+    }
+}

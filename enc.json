@@ -1,0 +1,11 @@
+{
+    "Rules":  [
+                  {
+                      "Resource":  [
+                                       "collection/tacmed-rag-v2"
+                                   ],
+                      "ResourceType":  "collection"
+                  }
+              ],
+    "AWSOwnedKey":  true
+}

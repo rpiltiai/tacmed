@@ -1,0 +1,33 @@
+﻿{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "s3:ListBucket",
+                "s3:GetObject"
+            ],
+            "Resource": [
+                "arn:aws:s3:::tacmed-kb-4850",
+                "arn:aws:s3:::tacmed-kb-4850/*"
+            ]
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "bedrock:InvokeModel"
+            ],
+            "Resource": [
+                "arn:aws:bedrock:eu-central-1::foundation-model/meta.llama3-2-3b-instruct-v1:0"
+            ]
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "bedrock:RetrieveAndGenerate",
+                "bedrock:Retrieve"
+            ],
+            "Resource": "*"
+        }
+    ]
+}

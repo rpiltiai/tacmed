@@ -1,0 +1,26 @@
+﻿{
+    "events": [
+        {
+            "logStreamName": "2026/01/10/[$LATEST]a04aea3c2d064299a6378a49800b4731",
+            "timestamp": 1768058519970,
+            "message": "Bedrock Error: An error occurred (ValidationException) when calling the InvokeModel operation: The provided model identifier is invalid.\n",
+            "ingestionTime": 1768058522570,
+            "eventId": "39429022549942137372482925480554230647095077354420436995"
+        },
+        {
+            "logStreamName": "2026/01/10/[$LATEST]9da7b3e465474f39bb4d36f22cd8fe00",
+            "timestamp": 1768058635321,
+            "message": "Bedrock Error: Expecting ',' delimiter: line 10 column 248 (char 790)\n",
+            "ingestionTime": 1768058641106,
+            "eventId": "39429025122355396768188835623142114267240412836112171010"
+        },
+        {
+            "logStreamName": "2026/01/10/[$LATEST]9da7b3e465474f39bb4d36f22cd8fe00",
+            "timestamp": 1768058669898,
+            "message": "Bedrock Error: Expecting ',' delimiter: line 1 column 353 (char 352)\n",
+            "ingestionTime": 1768058675982,
+            "eventId": "39429025893448263497782192030185572426436293693456580610"
+        }
+    ],
+    "searchedLogStreams": []
+}
