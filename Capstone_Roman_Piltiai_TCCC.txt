@@ -281,7 +281,35 @@ Postconditions: User gains access to the live triage and quiz modules.
 
 3.7 System Context Diagram
 
-The system context is defined by the interaction between the edge interface and the centralized AWS control plane. The frontend acts as the sensory input (Voice/Text), while the AWS Lambda functions serve as the cognitive processing center, orchestrating calls between the Bedrock Knowledge Bases and the DynamoDB persistence layer.
+The system context diagram (Figure 3.1) illustrates the high-level interactions between the Combat Medic, the Cloud System, and external entities.
+
+(See Appendix A for Mermaid Diagram Source)
+
+3.8 User Interface & Experience Guidelines (UX)
+
+The user interface is designed for "Cognitive Offloading" under high stress. It consists of three primary screens, each mapped to a specific phase of the combat mission.
+
+**Screen 1: The "Hot Button" Triage Interface**
+*Designed for: Care Under Fire (CUF) / Tactical Field Care (TFC)*
+- **Visual Design**: High-contrast, dark-mode interface to preserve light discipline.
+- **Key Element - "Live Mic" Indicator**: A pulsing red circle indicates active listening. Visual waveform feedback confirms that the medic's voice is being captured despite background noise.
+- **Text Stream**: A real-time scrolling transcript of the voice command appears at the top, allowing the medic to verify that "Tourniquet" wasn't misheard as "Target."
+- **Action Cards**: Large, touch-friendly "cards" appear dynamically. For example, if "Bleeding" is detected, a bright yellow card with "Start Timer: Tourniquet" slides into view.
+
+**Screen 2: The Digital DD1380 (Casualty Card)**
+*Designed for: Tactical Evacuation (TACEVAC)*
+- **Body Map Representation**: A 3D rotatable homunculus shows injuries plotted spatially (e.g., red circle on Left Thigh).
+- **MARCH Timeline**: A vertical timeline visualizes the M-A-R-C-H sequence. Completed steps (e.g., "Airway Cleared") turn green. Missed steps (e.g., "Hypothermia Prevention") remain grey and pulse gently to prompt attention.
+- **Vitals Logger**: One-tap buttons for "BP," "HR," and "Resp" allow for quick entry of trends without typing.
+
+**Screen 3: The Unit Command Dashboard**
+*Designed for: Medical Platoon Leader / HQ*
+- **Geospatial View**: A map overlay showing the real-time location of all active casualty beacons.
+- **Triage Aggregate**: A pie chart showing the ratio of URGENT / PRIORITY / ROUTINE casualties.
+- **Supply Estimator**: An AI-driven counter that estimates the consumption of blood products and bandages based on the reported injuries, aiding in resupply logic.
+
+Graph TD
+ralized AWS control plane. The frontend acts as the sensory input (Voice/Text), while the AWS Lambda functions serve as the cognitive processing center, orchestrating calls between the Bedrock Knowledge Bases and the DynamoDB persistence layer.
 
 ```mermaid
 graph LR
@@ -360,7 +388,20 @@ sequenceDiagram
 
 **Figure 4.3: Sequence Diagram (Voice-Driven Triage Cycle)**
 
-The sequence diagram demonstrates the low-latency interaction required for battlefield support. By shifting STT to the edge (browser), the system maintains responsiveness even on standard 4G/5G tactical links. The Lambda function maintains state by pulling current casualty history from DynamoDB before enriching the AI prompt with RAG-retrieved medical doctrine.
+**Detailed Data Flow Description:**
+1.  **Voice Capture**: The medic taps the "Listen" button. The browser's `AudioContext` captures the analog waveform.
+2.  **Edge STT**: The browser's Web Speech API converts the waveform to a text string (e.g., "Massive bleed, left leg.").
+3.  **Secure Transmission**: The browser sends a `POST /triage/voice-stream` request via HTTPS to API Gateway, attaching the JWT Bearer Token.
+4.  **Token Validation**: The Cognito Authorizer validates the token's signature and expiration.
+5.  **Lambda Invocation**: API Gateway triggers the `ClinicalReasoningFunction` with the text payload.
+6.  **State Retrieval**: The Lambda queries DynamoDB (`GetItem`) to retrieve the casualty's current `march_state`.
+7.  **RAG Lookup**: The system embeds the text vector and queries the Bedrock Knowledge Base for "Left Leg Hemorrhage Protocol."
+8.  **Context Assembly**: The Lambda constructs a prompt containing: System Persona + Current Casualty State + RAG Excerpts + User Query.
+9.  **Inference**: AWS Bedrock (Llama 3) processes the prompt and generates a structured JSON response.
+10. **State Update**: The Lambda writes the new treatment ("Tourniquet Applied") to the DynamoDB `CasualtyTable`.
+11. **Audit Logging**: Asynchronously, the `AuditLogger` function records the transaction hash.
+12. **Response**: The API Gateway returns the AI's guidance ("Apply CAT TQ high and tight") to the frontend.
+13. **Synthesis**: The browser's TTS engine speaks the response to the medic's earpiece.
 
 --------------------------------------------------------------------------------
 
@@ -472,9 +513,62 @@ The communication between the frontend and the cloud backend is strictly JSON-ba
 }
 ```
 
-4.5 API Architecture
+4.5 Detailed API Specification (OpenAPI Subset)
 
-The API follows a structured schema where every request contains the `casualtyId`, the `medicId`, and the `tacticalContext` (Phase of Care). This allows the backend to provide responses that are not just medically accurate, but "Tactically Sound." For example, if the `tacticalContext` is `Care Under Fire`, the API will automatically prioritize hemorrhage control over airway management in its response ranking.
+The system exposes a RESTful API via Amazon API Gateway. Below are the six core endpoints governing the triage lifecycle.
+
+**1. Authentication**
+- **Endpoint**: `POST /auth/login`
+- **Description**: Exchanges Cognito credentials for a JWT Access Token.
+- **Response**: `{ "token": "eyJraWQi...", "expires_in": 3600, "role": "MEDIC" }`
+
+**2. Voice Triage Stream**
+- **Endpoint**: `POST /triage/voice-stream`
+- **Description**: Primary entry point for voice-transcribed medical queries.
+- **Request Body**:
+  ```json
+  {
+    "casualty_id": "c-123-45",
+    "transcript": "No radial pulse found. Skin is pale and clammy.",
+    "confidence": 0.92,
+    "timestamp": 1735667200
+  }
+  ```
+- **Response (200 OK)**:
+  ```json
+  {
+    "action": "Diagnose: Clinical Shock. Initiate Fluid Resuscitation immediately.",
+    "rationale": "Absence of radial pulse indicates systolic BP < 80mmHg.",
+    "protocol_ref": "TCCC-MP-24.3",
+    "voice_synthesize": "Shock detected. Start fluids."
+  }
+  ```
+
+**3. Casualty Record Management**
+- **Endpoint**: `GET /casualty/{id}/full-history`
+- **Description**: Retrieves the complete event log for a specific patient.
+- **Response**: Returns the aggregated JSON object described in Section 4.4.
+
+**4. Update Vitals**
+- **Endpoint**: `PATCH /casualty/{id}/vitals`
+- **Description**: Atomic update of specific vital signs.
+- **Request Body**: `{ "hr": 120, "bp_sys": 90, "spo2": 94 }`
+
+**5. Unit Dashboard Data**
+- **Endpoint**: `GET /unit/{unit_id}/dashboard`
+- **Description**: Returns aggregated stats for the Commander's Dashboard.
+- **Response**:
+  ```json
+  {
+    "active_casualities": 14,
+    "triage_summary": { "URGENT": 3, "PRIORITY": 5, "ROUTINE": 6 },
+    "nearest_casevac_eta": "14 mins"
+  }
+  ```
+
+**6. Audit Trail**
+- **Endpoint**: `GET /audit/logs`
+- **Description**: Read-only endpoint for post-mission medical review. Access restricted to `MEDICAL_OFFICER` role.
 
 4.6 Authentication & Authorization
 
@@ -538,12 +632,20 @@ export class TcccTutorStack extends cdk.Stack {
 }
 ```
 
-5.2 Lambda implementation
+5.2 Lambda Component Catalog
 
-The implementation of the Lambda functions focuses on "Cold Start Optimization." 
-- **Configuration**: Functions are allocated **1024 MB RAM** to provide sufficient CPU burst for Boto3 initialization and Bedrock payload parsing. 
-- **Timeout**: Set to **29 seconds** to align with the API Gateway hard limit of 30 seconds.
-- **Provisioned Concurrency**: Production aliases have a minimum of **2 provisioned instances**, ensuring that medical queries never suffer from initialization latency.
+The "Serverless Backend" is not a monolith; it is a composition of specialized microfunctions.
+
+| Function Name | Trigger | Memory | Timeout | Primary Responsibility |
+| :--- | :--- | :--- | :--- | :--- |
+| **`SpeechProcessor`** | API Gateway | 1024 MB | 10s | Text normalization, PII redaction, and intent classification (e.g., distinguishing "Record Vitals" from "Query Protocol"). |
+| **`ClinicalOrchestrator`** | API Gateway | 2048 MB | 29s | The "Brain." Coordinate retrieval from Bedrock Knowledge Base, constructs the Llama 3 prompt, and parses the JSON response. |
+| **`RAGRetriever`** | Internal SDK | 512 MB | 5s | embedding generation and vector similarity search against the TCCC manuals. |
+| **`AuditLogger`** | DynamoDB Stream | 128 MB | 30s | Asynchronously listens for DB changes and writes immutable logs to S3 Glacier for long-term legal storage. |
+| **`NotificationDispatcher`** | EventBridge | 256 MB | 10s | Sends SNS alerts to HQ when a casualty is marked "URGENT" or "EXPECTANT". |
+| **`QuizEngine`** | API Gateway | 512 MB | 10s | Generates dynamic multiple-choice questions based on the user's weak areas identified in previous sessions. |
+
+5.3 Bedrock & Llama 3 Configuration
 
 5.3 Bedrock & Llama 3 Configuration
 
@@ -725,7 +827,32 @@ $$S_p = (Baseline\_Weight \times 2) + (\Delta\_HR \div 10) + (\Delta\_RR \div 5)
 
 The system automatically ranks Scenario A above Scenario B in the unit-wide dashboard, ensuring that the evacuation helicopter pilot and the surgical team see the most critical patients at the top of their queue.
 
-6.6 Offline fallback logic
+6.7 Mathematical Formalization
+
+To quantify the "trustworthiness" of the AI's advice, we implemented a formal confidence metric.
+
+**6.7.1 AI Confidence Score Formula**
+The system presents a confidence score $C_{total}$ [0.0 - 1.0] to the medic.
+$$C_{total} = (w_1 \cdot Sim_{vector}) + (w_2 \cdot Match_{keyword}) - P_{penalty}$$
+
+Where:
+- $Sim_{vector}$: Cosine similarity score from the RAG retrieval (0-1).
+- $Match_{keyword}$: Boolean (0 or 1) indicating if the generated answer contains exact protocol terms (e.g., "Tourniquet").
+- $P_{penalty}$: A penalty factor (0.5) if the generated text contains "uncertainty phrases" (e.g., "I think", "maybe").
+- Weights: $w_1 = 0.7$, $w_2 = 0.3$.
+
+**6.7.2 Extended CASEVAC Priority Equation**
+Expanding on section 6.5, the full operational priority index $P_{casevac}$ is defined as:
+
+$$P_{casevac} = \sum_{i=1}^{n} (I_i \cdot Loc_i) + \frac{|\Delta HR|}{10} + \frac{|\Delta RR|}{5} + \mathcal{S}_{shock}$$
+
+Where:
+- $I_i$: Injury severity of wound $i$.
+- $Loc_i$: Location multiplier (Head=2.0, Torso=1.5, Limb=1.0).
+- $\mathcal{S}_{shock}$: Shock state constant (Active=3.0, Inactive=0.0).
+This formalized approach removes subjective bias from evacuation sequencing.
+
+6.8 Offline fallback logic
 
 In the event of total AWS disconnection, the system falls back to a locally stored "Tactical Rulebook." This is a lightweight JSON file containing the top 50 most common MARCH procedures. While this lacks the natural language flexibility of the LLM, it ensures that the medic still has access to the core standardized procedures during "Comms Blackout" periods.
 
@@ -807,11 +934,42 @@ Medics are registered with custom attributes to ensure unit-level data segregati
 
 --------------------------------------------------------------------------------
 
-CHAPTER 8 – SOLUTION DEPLOYMENT
 
-8.1 CDK deployment
+CHAPTER 8 – SOLUTION DEPLOYMENT & OPERATIONS
 
-The deployment of the TCCC Decision Support System is fully automated using the AWS Cloud Development Kit (CDK). The infrastructure is defined as a series of "Stacks" (Identity, Storage, Compute, Intelligence). A single command `cdk deploy --all` initiates the transformation of the TypeScript/Python definitions into a CloudFormation template, which AWS then uses to provision the resources. This ensures that the system is environment-agnostic; it can be deployed to `us-east-1` for testing or `eu-central-1` (Frankfurt) for operational proximity to the Ukrainian theater with zero manual configuration.
+8.1 Operational Runbook
+
+The following "Runbook" details the exact commands required to deploy, maintain, and secure the TCCC Tutor in a fresh AWS environment.
+
+**8.1.1 First-Time Deployment**
+1. **Prerequisites**: Ensure Node.js 20+, Python 3.11, and AWS CLI v2 are installed.
+2. **Clone & Install**:
+   ```bash
+   git clone https://github.com/rpiltiai/tacmed.git
+   cd tacmed
+   npm install
+   pip install -r requirements.txt
+   ```
+3. **Bootstrap CDK**:
+   ```bash
+   # Prepares the AWS region (creates S3 buckets for assets)
+   cdk bootstrap aws://123456789012/eu-central-1
+   ```
+4. **Deploy Stacks**:
+   ```bash
+   # Deploy all stacks in dependency order
+   cdk deploy --all --require-approval never
+   ```
+
+**8.1.2 Environment Variable Configuration**
+The following SSM Parameters must be set in the AWS Console for the Lambda capabilities to function:
+- `/tacmed/bedrock-model-id`: `meta.llama3-70b-instruct-v1:0`
+- `/tacmed/prompts/system`: (Content of System Prompt from Ch 5.4)
+- `/tacmed/feature-flags/voice-enabled`: `true`
+
+**8.1.3 Security Operations (SecOps)**
+- **Key Rotation**: API Keys for external monitoring tools are rotated every 30 days using AWS Secrets Manager.
+- **Log Archival**: CloudWatch Logs are exported to S3 Glacier Deep Archive every 24 hours via a scheduled Lambda, with a retention policy of 7 years for legal compliance.
 
 8.1.2 Deployment Verification (CLI Output)
 After running `npm run build && cdk deploy`, the engineer verifies the CloudFormation outputs.
